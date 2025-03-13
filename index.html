@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日落时光记录</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap');
+        
+        .post-card {
+            transition: transform 0.3s ease;
+            background: linear-gradient(145deg, rgba(255,255,255,0.9) 0%, rgba(245,245,245,0.9) 100%);
+        }
+        .post-card:hover {
+            transform: translateY(-3px);
+        }
+        .time-tag {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+            box-shadow: 0 2px 8px rgba(255,107,107,0.15);
+            position: absolute;
+            right: 12px;
+            top: 12px;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50 min-h-screen p-6 font-['Noto_Serif_SC']">
+    <div class="max-w-3xl mx-auto space-y-8">
+        <!-- 标题区 -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">湖畔日落全记录</h1>
+            <p class="text-gray-600">7个关键时间点捕捉的湖面日落美景</p>
+        </div>
+
+        <!-- 图片展示区 -->
+        <div id="imageContainer" class="space-y-8"></div>
+    </div>
+
+    <script>
+        // 生成图片列表
+        const imageNames = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg'];
+        const descriptions = [
+            { time: '18:30', title: '初触地平线', desc: '太阳刚刚接触地平线，湖面反射出温暖的金色余晖' },
+            { time: '18:45', title: '红粉交响曲', desc: '天空被染成明亮的红粉色，湖面如镜般反射着天空的色彩' },
+            { time: '19:00', title: '暮色降临', desc: '太阳完全落下地平线，天空转为深紫色与蓝色的渐变' },
+            { time: '19:15', title: '星空初现', desc: '夜幕降临，湖面反射出逐渐显现的星空' },
+            { time: '19:30', title: '角度变化', desc: '不同角度拍摄的暮色湖景，天空呈现均匀的粉色' },
+            { time: '05:45', title: '晨曦初现', desc: '第一缕晨光穿透薄雾，湖面泛起银白色涟漪' },
+            { time: '20:15', title: '银河倒影', desc: '夜空中的银河清晰可见，湖面倒映璀璨星空' }
+        ];
+
+        // 生成HTML内容
+        const container = document.getElementById('imageContainer');
+        imageNames.forEach((name, index) => {
+            const imgElement = document.createElement('div');
+            imgElement.className = 'post-card rounded-xl p-6 shadow-lg';
+            imgElement.innerHTML = `
+                <div class="relative mb-6">
+                    <img 
+                        src="${name}" 
+                        alt="${descriptions[index].title}" 
+                        class="w-full rounded-lg object-cover h-64"
+                    >
+                    <div class="time-tag text-white px-3 py-1 rounded-full text-sm">
+                        ${descriptions[index].time}
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">${descriptions[index].title}</h3>
+                <p class="text-gray-600 leading-relaxed">
+                    ${descriptions[index].desc}
+                </p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <span class="bg-pink-100 text-pink-800 px-3 py-1 rounded-full text-sm">
+                        #${descriptions[index].title.split(' ')[0]}
+                    </span>
+                </div>
+            `;
+            container.appendChild(imgElement);
+        });
+    </script>
+</body>
+</html>
